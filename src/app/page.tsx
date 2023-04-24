@@ -1,7 +1,7 @@
 import { Header } from "./components/Header";
 import { Todo } from "./components/Todo";
 import { TodoList } from "./components/TodoList";
-import HydratedPosts from "./hydratedTodos";
+import HydratedTodos from "./hydratedTodos";
 
 export default function Home() {
 
@@ -12,7 +12,7 @@ export default function Home() {
       <Todo />
 
        {/* @ts-expect-error Server Component */}
-      <HydratedPosts />
+      <HydratedTodos />
     </main>
   )
 }
