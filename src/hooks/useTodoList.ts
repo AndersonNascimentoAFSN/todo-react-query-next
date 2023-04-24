@@ -1,6 +1,6 @@
-import { getTodoList } from "@/services/todo";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
+import { getTodoList } from "@/services/todo";
 
 export function useTodoList() {
   const oneMinute = 1000 * 60

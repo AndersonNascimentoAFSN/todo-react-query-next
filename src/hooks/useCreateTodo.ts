@@ -1,7 +1,7 @@
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+import { Task } from "@/types/task";
 import { createTodo } from "../services/todo";
-import { Task } from "../@types/task";
 
 export function useCreateTodo() {
   const queryClient = useQueryClient()
