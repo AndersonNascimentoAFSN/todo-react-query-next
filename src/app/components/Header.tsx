@@ -1,3 +1,5 @@
+'use client'
+
 type HeaderProps = {
   status?: number
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import { useTodoList } from "@/hooks/useTodoList";
 import { Header } from "./components/Header";
 import { Todo } from "./components/Todo";
