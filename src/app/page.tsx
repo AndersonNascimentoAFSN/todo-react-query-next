@@ -11,9 +11,10 @@ export default function Home() {
 
       <Todo />
 
-       {/* @ts-expect-error Server Component */}
       {/* <HydratedTodos /> */}
       <TodoList />
     </main>
   )
 }
+
+      // {/* @ts-expect-error Server Component */}
