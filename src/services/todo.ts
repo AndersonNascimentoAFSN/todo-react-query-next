@@ -26,6 +26,7 @@ export async function getTodoList() {
 
 type RemoveTodoProps = {
   id: string
+  isCompleted: boolean
 }
 
 export async function RemoveTodo({
@@ -33,6 +34,17 @@ export async function RemoveTodo({
 }: RemoveTodoProps) {
   await api<Task>(`http://localhost:3333/todo/${id}`, {
     method: "DELETE",
+    headers: { "Content-type": "application/json; charset=UTF-8" },
+  })
+}
+
+export async function completeTodo({
+  id,
+  isCompleted
+}: RemoveTodoProps) {
+  await api<Task>(`http://localhost:3333/todo/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify({ isCompleted }),
     headers: { "Content-type": "application/json; charset=UTF-8" },
   })
 }

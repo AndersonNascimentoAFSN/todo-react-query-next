@@ -13,7 +13,8 @@ export function TodoList() {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Descrição</th>
+            <th>Description</th>
+            <th>Complete</th>
             <th>Delete</th>
           </tr>
         </thead>
