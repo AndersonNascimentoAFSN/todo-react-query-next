@@ -3,17 +3,12 @@
     {
       "id": "_7h3qhA",
       "description": "JavaScript",
-      "isCompleted": false
+      "isCompleted": true
     },
     {
       "id": "Z5oGRXU",
       "description": "Python",
-      "isCompleted": false
-    },
-    {
-      "id": "o1S7Kt7",
-      "description": "TypeScript",
-      "isCompleted": false
+      "isCompleted": true
     }
   ]
 }
