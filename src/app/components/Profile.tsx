@@ -6,6 +6,7 @@
 // }
 
 type ProfileProps = {
+  // user: User
   name: string
   email: string
 }
