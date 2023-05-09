@@ -5,7 +5,7 @@ import { dehydrate, Hydrate } from '@tanstack/react-query'
 import getQueryClient from '../lib/getQueryclient'
 import { getTodoList } from '@/services/todo'
 
-import { TodoList } from './components/TodoList'
+// import { TodoList } from './components/TodoList'
 
 type HydratedTodosProps = {
   children: ReactNode

@@ -10,6 +10,10 @@ type RemoveTodoProps = {
   id: string
 }
 
+type GetTodoByIdProps = {
+  id: string
+}
+
 type CompletedTodoProps = {
   id: string
   isCompleted: boolean
@@ -30,6 +34,14 @@ class Todo {
 
   async getTodoList() {
     const todos = await api<Task[]>('http://localhost:3333/todo')
+
+    return todos
+  }
+
+  async getTodoById({
+    id,
+  }: GetTodoByIdProps) {
+    const todos = await api<Task[]>(`http://localhost:3333/todo/${id}`)
 
     return todos
   }
