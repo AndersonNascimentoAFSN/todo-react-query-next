@@ -43,6 +43,8 @@ export function useCompleteTodo() {
   })
 }
 
+/* // Com o código abaixo, é necessário invalidar a query para fazer a requisição novamente, pois o react-query não atualiza o estado do cache */
+
 // export function useCompleteTodo() {
 //   const queryClient = useQueryClient()
 
