@@ -7,14 +7,18 @@ export default function Home() {
 
   return (
     <main>
-      <Header />
+      {/* @ts-expect-error Server Component */}
+      <HydratedTodos>
+        <Header />
+      </HydratedTodos>
 
       <Todo />
 
-      {/* <HydratedTodos /> */}
-      <TodoList />
+      {/* @ts-expect-error Server Component */}
+      <HydratedTodos>
+        <TodoList />
+      </HydratedTodos>
+
     </main>
   )
 }
-
-      // {/* @ts-expect-error Server Component */}
