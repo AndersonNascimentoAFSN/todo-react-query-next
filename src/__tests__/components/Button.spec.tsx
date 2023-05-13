@@ -33,10 +33,14 @@ describe('<Button />', () => {
     expect(container).toMatchSnapshot()
   })
 
-  it('should be able to onClick has called', async () => {
-    render(<Button variant="primary">Add</Button>)
+  // it('should be able button variant primary have css', async () => {
+  //   render(<Button variant="primary">Add</Button>)
 
-    const buttonElement = screen.getByRole('button', { name: /add/i })
+  //   const buttonElement = screen.getByRole('button', { name: /add/i })
 
-  })
+  //   expect(buttonElement).toHaveStyle({
+  //     backgroundColor: 'rgb(0 123 22)',
+  //     padding: '14px 32px 14px 32px',
+  //   })
+  // })
 })

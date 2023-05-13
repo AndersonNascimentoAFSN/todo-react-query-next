@@ -3,7 +3,7 @@
 exports[`<Button /> should be able to onClick has called 1`] = `
 <div>
   <button
-    class="p-2 bg-purple-700 rounded-lg text-white hover:opacity-75 undefined"
+    class="py-3.5 px-8 rounded-md border-2 group flex gap-3 justify-center items-center bg-green text-white hover:bg-green-light border-none undefined"
   >
     Add
   </button>
