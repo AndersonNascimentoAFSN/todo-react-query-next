@@ -33,9 +33,9 @@ export function useCompleteTodo() {
 
 
     },
-    /* Não estou vendo a finalidade de usar o onError,
-    visto que se houver um erro e não quero que o valor no front-end seja modificado,
-    no mínimo quero que apareça alguma mensagem na tela informando o ocorrido. */
+    /* Analisar melhor como implementar essa parte de onError... em caso de erros durante um post, por exemplo.
+      Durante um post pode ser que haja um erro, mas task já foi marcada como concluída, então é necessário desmarcá-la.
+    */
     // onError: (_err, task, context) => { 
     //   if (!context) return
     //   // queryClient.setQueryData(['todoList', task.id], context?.previousTask)
