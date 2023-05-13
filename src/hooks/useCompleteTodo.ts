@@ -33,12 +33,28 @@ export function useCompleteTodo() {
 
 
     },
-    onError: (_err, task, context) => {
-      if (!context) return
+    /* Não estou vendo a finalidade de usar o onError,
+    visto que se houver um erro e não quero que o valor no front-end seja modificado,
+    no mínimo quero que apareça alguma mensagem na tela informando o ocorrido. */
+    // onError: (_err, task, context) => { 
+    //   if (!context) return
+    //   // queryClient.setQueryData(['todoList', task.id], context?.previousTask)
 
-      queryClient.setQueryData(['todoList', task.id], context?.previousTask)
-    },
-    onSettled: (_newTodo, _error, _variables, context) => {
+    //   queryClient.setQueryData(['todoList'],
+    //   context.tasks.map((item) => {
+    //     if (item.id === context.task.id) {
+    //       return {
+    //         id: context.previousTask.id,
+    //         isCompleted: context.previousTask.isCompleted,
+    //         description: context.previousTask.description
+    //       }
+    //     }
+    //     return item
+    //   })
+    // )
+    // },
+    onSettled: (_newTodo, error, _variables, context) => {
+      if (error) return
 
       if (!context) return
 

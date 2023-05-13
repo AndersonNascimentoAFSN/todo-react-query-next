@@ -18,7 +18,8 @@ export function useRemoveTodo() {
         queryClient.setQueryData(['todoList'], context?.tasks)
       },
 
-      onSettled: (_newTodo, _error, _variables, context) => {
+      onSettled: (_newTodo, error, _variables, context) => {
+        if (error) return
 
         if (!context) return
 
