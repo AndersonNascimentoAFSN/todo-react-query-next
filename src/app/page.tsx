@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Header } from "./components/Header";
 import { Todo } from "./components/Todo";
 import { TodoList } from "./components/TodoList";
@@ -7,17 +8,16 @@ export default function Home() {
 
   return (
     <main>
-      {/* @ts-expect-error Server Component */}
-      <HydratedTodos>
-        <Header />
-      </HydratedTodos>
+      <Header />
 
       <Todo />
 
-      {/* @ts-expect-error Server Component */}
-      <HydratedTodos>
-        <TodoList />
-      </HydratedTodos>
+      <Suspense fallback={<div>Loading...</div>}>
+        {/* @ts-expect-error Server Component */}
+        <HydratedTodos>
+          <TodoList />
+        </HydratedTodos>
+      </Suspense>
 
     </main>
   )

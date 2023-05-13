@@ -3,9 +3,8 @@
 import { useTodoList } from "@/hooks/useTodoList"
 import { TodoItem } from "./TodoItem"
 
-
 export function TodoList() {
-  const { data: todos, isLoading: isLoadingTodo } = useTodoList()
+  const { data: todos, /* isLoading: isLoadingTodo */ } = useTodoList() // isLoadingTodo não tem funcionalidade, visto que os dados não são consultados no lado do cliente
 
   return (
     <div className="w-screen flex items-center justify-center">

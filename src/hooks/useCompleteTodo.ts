@@ -14,8 +14,23 @@ export function useCompleteTodo() {
 
       if (tasks) {
         const previousTask = tasks.filter((item) => item.id === task.id)[0] /* Foi necessário fazer isso, pois não está em uma tela de edição consequentemente não dá para utilizar uma query de id */
+
+        queryClient.setQueryData(['todoList'],
+          tasks.map((item) => {
+            if (item.id === task.id) {
+              return {
+                id: task.id,
+                isCompleted: task.isCompleted,
+                description: previousTask.description
+              }
+            }
+            return item
+          })
+        )
+
         return { previousTask, task, tasks }
       }
+
 
     },
     onError: (_err, task, context) => {
