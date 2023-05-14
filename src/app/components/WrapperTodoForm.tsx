@@ -1,45 +1,20 @@
 'use client'
 
 import { useCallback } from "react"
-import { z } from "zod";
-import { FormProvider, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod"
 
 import { useCreateTodo } from "@/hooks/useCreateTodo"
-import { TodoForm } from "./TodoForm"
-
-const schemaCreateTodo = z.object({
-  todo: z.object({
-    description: z.string().min(1, 'É necessário informar uma descrição para a tarefa.'),
-  })
-})
-
-export type CreateTodoForm = z.infer<typeof schemaCreateTodo>
+import { CreateTodoForm, TodoForm } from "./TodoForm"
+import { UseFormReset } from "react-hook-form"
 
 export function WrapperTodoForm() {
-  const createTodoForm = useForm<CreateTodoForm>({
-    criteriaMode: 'all',
-    mode: 'all',
-    resolver: zodResolver(schemaCreateTodo),
-    defaultValues: {
-      todo: {
-        description: ''
-      }
-    },
-  })
-
-  const { reset } = createTodoForm
-
   const { mutateAsync } = useCreateTodo()
 
-  const onSubmitAddTodo = useCallback((todoData: CreateTodoForm) => {
-    reset()
+  const onSubmitAddTodo = useCallback((todoData: CreateTodoForm, resetForm: UseFormReset<CreateTodoForm>) => {
+    resetForm()
     return mutateAsync(todoData)
-  }, [mutateAsync, reset])
+  }, [mutateAsync])
 
   return (
-    <FormProvider {...createTodoForm}>
-      <TodoForm onSubmitAddTodo={onSubmitAddTodo} />
-    </FormProvider>
+    <TodoForm onSubmitAddTodo={onSubmitAddTodo} />
   )
 }
