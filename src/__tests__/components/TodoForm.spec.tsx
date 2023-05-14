@@ -28,10 +28,8 @@ describe('<TodoForm>', () => {
     const inputElement = screen.getByRole('textbox', { name: /todo.description/i })
     const buttonElement = screen.getByRole('button', { name: /adicionar/i })
 
-    await act(async () => {
-      await userEvent.type(inputElement, inputValue)
-      await userEvent.click(buttonElement)
-    })
+    await userEvent.type(inputElement, inputValue)
+    await userEvent.click(buttonElement)
 
     await waitFor(() => {
       expect(handleSubmitForm).toHaveBeenCalled()
@@ -49,9 +47,7 @@ describe('<TodoForm>', () => {
 
     const buttonElement = screen.getByRole('button', { name: /adicionar/i })
 
-    await act(async () => {
-      await userEvent.click(buttonElement)
-    })
+    await userEvent.click(buttonElement)
 
     await waitFor(() => {
       expect(handleSubmitForm).not.toHaveBeenCalled()
@@ -63,9 +59,7 @@ describe('<TodoForm>', () => {
 
     const buttonElement = screen.getByRole('button', { name: /adicionar/i })
 
-    await act(async () => {
-      await userEvent.click(buttonElement)
-    })
+    await userEvent.click(buttonElement)
 
     await waitFor(() => {
       const errorMessage = screen.getByText('É necessário informar uma descrição para a tarefa.')
@@ -79,10 +73,8 @@ describe('<TodoForm>', () => {
     const buttonElement = screen.getByRole('button', { name: /adicionar/i })
     const inputElement = screen.getByRole('textbox', { name: /todo.description/i })
 
-    await act(async () => {
-      await userEvent.type(inputElement, inputValue)
-      await userEvent.click(buttonElement)
-    })
+    await userEvent.type(inputElement, inputValue)
+    await userEvent.click(buttonElement)
 
     await waitFor(() => {
       const errorMessage = screen.queryByText('É necessário informar uma descrição para a tarefa.')

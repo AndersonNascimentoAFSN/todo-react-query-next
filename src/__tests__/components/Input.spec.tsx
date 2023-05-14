@@ -33,9 +33,7 @@ describe('<Input />', () => {
 
     const inputElement = screen.getByRole('textbox', { name: /name/i })
 
-    await act(async () => {
-      await userEvent.type(inputElement, inputValue)
-    })
+    await userEvent.type(inputElement, inputValue)
 
     expect(inputElement).toHaveValue(inputValue)
   })
