@@ -1,21 +1,16 @@
 import { Suspense } from "react";
+
 import { Header } from "./components/Header";
-import { CreateTodoForm, TodoForm } from "./components/TodoForm";
 import { TodoList } from "./components/TodoList";
 import HydratedTodos from "./hydratedTodos";
-import { useCreateTodo } from "@/hooks/useCreateTodo"
+import { WrapperTodoForm } from "./components/WrapperTodoForm";
 
 export default function Home() {
-
-  function onSubmitAddTodo(todoData: CreateTodoForm) {
-    // mutateAsync(todoData)
-  }
-
   return (
     <main>
       <Header />
 
-      <TodoForm onSubmitAddTodo={onSubmitAddTodo} />
+      <WrapperTodoForm />
 
       <Suspense fallback={<div>Loading...</div>}>
         {/* @ts-expect-error Server Component */}
