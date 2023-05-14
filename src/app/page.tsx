@@ -7,18 +7,19 @@ import { WrapperTodoForm } from "./components/WrapperTodoForm";
 
 export default function Home() {
   return (
-    <main>
+    <div>
       <Header />
 
-      <WrapperTodoForm />
+      <main>
+        <WrapperTodoForm />
 
-      <Suspense fallback={<div>Loading...</div>}>
-        {/* @ts-expect-error Server Component */}
-        <HydratedTodos>
-          <TodoList />
-        </HydratedTodos>
-      </Suspense>
-
-    </main>
+        <Suspense fallback={<div>Loading...</div>}>
+          {/* @ts-expect-error Server Component */}
+          <HydratedTodos>
+            <TodoList />
+          </HydratedTodos>
+        </Suspense>
+      </main>
+    </div>
   )
 }
