@@ -4,6 +4,10 @@
       "description": "JavaScript",
       "id": 2,
       "isCompleted": false
+    },
+    {
+      "description": "TypeScript",
+      "id": 3
     }
   ]
 }

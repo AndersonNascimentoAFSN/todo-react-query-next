@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Input /> should be able to render the input correctly 1`] = `
+<div>
+  <input
+    aria-label="name"
+    autocomplete="off"
+    class="w-full p-4 rounded-md bg-gray1 placeholder:text-gray5 text-gray6 outline-none focus:border-2 focus:border-green-light  undefined"
+    name="name"
+  />
+</div>
+`;
