@@ -6,7 +6,7 @@ import { Task } from "@/types/task";
 export function useRemoveTodo() {
   const queryClient = useQueryClient()
 
-  return useMutation(
+  const { mutateAsync } = useMutation(
     {
       mutationFn: TodoService.removeTodo,
       onMutate: async ({ id }) => {
@@ -29,6 +29,8 @@ export function useRemoveTodo() {
       },
     }
   )
+
+  return { mutateAsync }
 }
 
 /* // Com o código abaixo, é necessário invalidar a query para fazer a requisição novamente, pois o react-query não atualiza o estado do cache */

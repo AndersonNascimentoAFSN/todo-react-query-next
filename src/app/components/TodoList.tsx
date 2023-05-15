@@ -10,7 +10,7 @@ import { useCompleteTodo } from "@/hooks/useCompleteTodo"
 import { Task } from "@/types/task"
 
 export function TodoList() {
-  const { data: todos, /* isLoading: isLoadingTodo */ } = useTodoList() // isLoadingTodo não tem funcionalidade, visto que os dados não são consultados no lado do cliente
+  const { data: todos, isLoading: isLoadingTodo } = useTodoList() // isLoadingTodo não tem funcionalidade, visto que os dados não são consultados no lado do cliente
   const { mutateAsync: removeTodo } = useRemoveTodo()
   const { mutateAsync: completeTodo } = useCompleteTodo()
 

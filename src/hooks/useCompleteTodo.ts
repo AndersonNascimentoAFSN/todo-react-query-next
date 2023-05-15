@@ -7,7 +7,7 @@ import { Task } from "@/types/task";
 export function useCompleteTodo() {
   const queryClient = useQueryClient()
 
-  return useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: TodoService.completeTodo,
     onMutate: async (task) => {
       const tasks = queryClient.getQueryData<Task[]>(['todoList'])
@@ -72,6 +72,8 @@ export function useCompleteTodo() {
       )
     },
   })
+
+  return { mutateAsync }
 }
 
 /* // Com o código abaixo, é necessário invalidar a query para fazer a requisição novamente, pois o react-query não atualiza o estado do cache */
