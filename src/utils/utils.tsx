@@ -1,42 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render } from "@testing-library/react";
-import { rest } from "msw";
 import * as React from "react";
-
-export const handlers = [
-  rest.get("http://localhost:3333/todo", (_req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        todo: [
-          {
-            id: '1',
-            description: 'Task 1',
-            isCompleted: false
-          },
-          {
-            id: '2',
-            description: 'Task 2',
-            isCompleted: false
-          },
-          {
-            id: '3',
-            description: 'Task 3',
-            isCompleted: false
-          }
-        ]
-      })
-    );
-  }),
-  // rest.post("*/todo", (req, res, ctx) => {
-  //   return res(
-  //     ctx.status(200),
-  //     ctx.json({
-  //       name: "Chuck Norris",
-  //     })
-  //   );
-  // }),
-];
 
 const createTestQueryClient = () =>
   new QueryClient({

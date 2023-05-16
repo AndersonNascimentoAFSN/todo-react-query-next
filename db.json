@@ -1,46 +1,17 @@
 {
   "todo": [
     {
-      "description": "JavaScript",
-      "id": 2,
-      "isCompleted": false
-    },
-    {
-      "description": "TypeScript",
-      "id": 3,
-      "isCompleted": false
-    },
-    {
       "description": "Python",
       "id": 4
     },
     {
       "description": "task1",
-      "id": 5
+      "id": 5,
+      "isCompleted": true
     },
     {
       "description": "task2",
       "id": 6
-    },
-    {
-      "description": "task3",
-      "id": 7
-    },
-    {
-      "description": "task4",
-      "id": 8
-    },
-    {
-      "description": "task5",
-      "id": 9
-    },
-    {
-      "description": "task6",
-      "id": 10
-    },
-    {
-      "description": "task7",
-      "id": 11
     }
   ]
 }

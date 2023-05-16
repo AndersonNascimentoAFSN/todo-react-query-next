@@ -1,8 +1,5 @@
 import { renderHook, render, screen, logRoles, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { setupWorker, rest } from 'msw'
-import { setupServer } from 'msw/node'
-import * as ReactQuery from '@tanstack/react-query'
 
 import { WrapperReactQuery } from "@/utils/WrapperReactQuery"
 import { TodoList } from "@/app/components/TodoList"
@@ -41,44 +38,6 @@ describe('<TodoList />', () => {
       isCompleted: false
     }
   ]
-  // const server = setupServer(
-  //   rest.get('http://localhost:3333/todo', (_req, res, ctx) => {
-  //     return res(
-  //       ctx.status(200),
-  //       ctx.json([
-  //         {
-  //           id: '1',
-  //           description: 'Task 1',
-  //           isCompleted: false
-  //         },
-  //         {
-  //           id: '2',
-  //           description: 'Task 2',
-  //           isCompleted: false
-  //         },
-  //         {
-  //           id: '3',
-  //           description: 'Task 3',
-  //           isCompleted: false
-  //         }
-  //       ])
-  //     )
-  //   })
-  // )
-
-
-
-  // beforeAll(() => {
-  //   server.listen()
-  // })
-
-  // afterAll(() => {
-  //   server.close()
-  // })
-
-  // afterEach(() => {
-  //   jest.clearAllMocks()
-  // })
 
   beforeEach(() => {
     jest.spyOn(useTodoList, 'useTodoList').mockImplementation(() => ({

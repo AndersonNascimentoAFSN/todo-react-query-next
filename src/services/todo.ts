@@ -39,7 +39,7 @@ export async function getTodoList() {
 export async function RemoveTodo({
   id
 }: RemoveTodoProps) {
-  await api<Task>(`http://localhost:3333/todo/${id}`, {
+  await api<void>(`http://localhost:3333/todo/${id}`, {
     method: "DELETE",
     headers: { "Content-type": "application/json; charset=UTF-8" },
   })
