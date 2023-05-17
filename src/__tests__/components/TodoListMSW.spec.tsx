@@ -1,15 +1,13 @@
 import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 
-import { WrapperReactQuery } from "@/utils/WrapperReactQuery"
 import { renderWithClient } from "@/utils/utils"
 
 import { TodoList } from "@/app/components/TodoList"
 
-
 describe('<TodoList />', () => {
 
-  it('should be able to render correctly', () => {
+  it('should be able to render thead correctly', async () => {
     renderWithClient(<TodoList />)
 
     const thIdElement = screen.getByRole('columnheader', { name: /id/i })
@@ -23,37 +21,61 @@ describe('<TodoList />', () => {
     expect(thDeleteElement).toBeVisible()
   })
 
-  it('should be able to render items in the list correctly', async () => {
+  it('should be render todo list with three tasks', async () => {
     renderWithClient(<TodoList />)
 
+    await waitFor(async () => {
+      const buttonsElement = screen.getAllByRole('button', { name: /delete/i })
+      const descriptionsElement = screen.queryAllByText(/task/i)
+
+      buttonsElement.forEach((button) => {
+        expect(button).toBeVisible()
+      })
+
+      descriptionsElement.forEach((descriptionElement) => {
+        expect(descriptionElement).toBeVisible()
+      })
+
+      expect(descriptionsElement).toHaveLength(3)
+      expect(buttonsElement).toHaveLength(3)
+    })
+  })
+
+  it('should be able to delete task the list with three tasks', async () => {
+    renderWithClient(<TodoList />)
 
     await waitFor(async () => {
-      const buttonElement = screen.getAllByRole('button', { name: /delete/i })
-      expect(buttonElement[0]).toBeVisible()
-      await userEvent.click(buttonElement[0])
+      const buttonsElement = screen.getAllByRole('button', { name: /delete/i })
+      const descriptionElement = screen.queryByText(/task 1/i)
+
+      expect(descriptionElement).toBeVisible()
+      expect(buttonsElement).toHaveLength(3)
+
+      await userEvent.click(buttonsElement[0])
     })
 
     await waitFor(() => {
-      const descriptionElement = screen.queryAllByText(/task 1/i)
-      expect(descriptionElement[0]).toBeVisible()
+      const buttonsElement = screen.getAllByRole('button', { name: /delete/i })
+      const descriptionElement = screen.queryByText(/task 1/i)
+
+      expect(descriptionElement).not.toBeInTheDocument()
+      expect(buttonsElement).toHaveLength(2)
     })
 
   })
 
-  it('should be able change isCompleted', async () => {
+  it('should be able change the task for completed and return for not completed', async () => {
     renderWithClient(<TodoList />)
-
-
-    // await waitFor(() => {
-    // })
     const inputElement = await screen.findAllByRole('checkbox', { name: /isCompleteCheckBox/i })
-    expect(inputElement[0]).toBeVisible()
+
+    expect(inputElement[0]).not.toBeChecked()
+
     await userEvent.click(inputElement[0])
 
-    // await waitFor(() => {
-    //   const descriptionElement = screen.queryAllByText(/task 1/i)
-    //   expect(descriptionElement[0]).toBeVisible()
-    // })
+    expect(inputElement[0]).toBeChecked()
 
+    await userEvent.click(inputElement[0])
+
+    expect(inputElement[0]).not.toBeChecked()
   })
 })
