@@ -38,4 +38,13 @@ export function createWrapper() {
   );
 }
 
-createWrapper.displayName = "createWrapper";
+export function wrapper({ children }: { children: React.ReactNode }) {
+  const testQueryClient = createTestQueryClient();
+
+  return (
+    <QueryClientProvider client={testQueryClient}>
+      {children}
+    </QueryClientProvider>
+  )
+}
+

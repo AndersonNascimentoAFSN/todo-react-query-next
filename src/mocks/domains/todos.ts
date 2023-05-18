@@ -9,6 +9,7 @@ export const todoHandlers = [
       ctx.json<Task[]>(todoData)
     )
   }),
+
   rest.post('*/todo', async (req, res, ctx) => {
     const { description, isCompleted } = await req.json()
 
@@ -56,7 +57,7 @@ export const todoHandlers = [
         )
       } else {
         return res(ctx.json({}), ctx.status(404))
-      } 
+      }
     }
     return res(ctx.json({}), ctx.status(404))
   }),
