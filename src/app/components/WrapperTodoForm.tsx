@@ -11,7 +11,7 @@ export function WrapperTodoForm() {
 
   const onSubmitAddTodo = useCallback((todoData: CreateTodoForm, resetForm: UseFormReset<CreateTodoForm>) => {
     resetForm()
-    return mutateAsync(todoData)
+    return mutateAsync({ description: todoData.todo.description, isCompleted: false })
   }, [mutateAsync])
 
   return (

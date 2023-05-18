@@ -1,31 +1,15 @@
+import { Task } from "@/types/task"
+import { api } from "@/services/api"
 
-import { Task } from "@/types/task";
-import { api } from "../../api";
-
-type CreateTodoProps = {
-  todo: Task
-}
-
-type RemoveTodoProps = {
-  id: string
-}
-
-type GetTodoByIdProps = {
-  id: string
-}
-
-type CompletedTodoProps = {
-  id: string
-  isCompleted: boolean
-}
+import { CompletedTodoProps, CreateTodoProps, GetTodoByIdProps, RemoveTodoProps } from "./types"
 
 class Todo {
   async createTodo({
-    todo
+    description, isCompleted
   }: CreateTodoProps) {
     const todoCreated = await api<Task>('http://localhost:3333/todo', {
       method: "POST",
-      body: JSON.stringify(todo),
+      body: JSON.stringify({ description, isCompleted }),
       headers: { "Content-type": "application/json; charset=UTF-8" },
     })
 

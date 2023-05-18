@@ -18,11 +18,11 @@ export function useCreateTodo() {
       queryClient.setQueryData(['todoList'], context?.previousTodos)
     },
 
-    onSuccess: (task: Task) => {
-      queryClient.setQueryData<Task[]>(['todoList'], (todos) => {
-        if (!todos) return
+    onSuccess: (task: Omit<Task, 'id'>) => {
+      queryClient.setQueryData<Omit<Task, 'id'>[]>(['todoList'], (tasks) => {
+        if (!tasks) return
 
-        return [...todos, task]
+        return [...tasks, task]
       })
     },
   })
