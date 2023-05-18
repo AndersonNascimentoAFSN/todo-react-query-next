@@ -12,11 +12,15 @@ export const todoHandlers = [
 
   rest.post('*/todo', async (req, res, ctx) => {
     const { description, isCompleted } = await req.json()
+    
+    const id = Number(todoData[todoData.length - 1].id) + 1
 
     const todo: Task = {
+      id: id.toString(),
       description,
       isCompleted
     }
+
 
     todoData.push(todo)
     return res(
