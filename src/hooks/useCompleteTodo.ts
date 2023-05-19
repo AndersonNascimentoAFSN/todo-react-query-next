@@ -3,6 +3,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { TodoService } from "../services/http/todo";
 import { Task } from "@/types/task";
 
+// Optimistic Updates (https://tanstack.com/query/v4/docs/react/guides/optimistic-updates)
+// A atualização ocorre antes da requisição, ou seja, o estado do cache é atualizado antes da requisição. Caso a requisição falhe, o estado do cache é atualizado para o estado anterior. Caso a requisição seja bem sucedida, o estado do cache é atualizado para o estado atualizado.
 
 export function useCompleteTodo() {
   const queryClient = useQueryClient()
@@ -10,6 +12,8 @@ export function useCompleteTodo() {
   const { mutateAsync } = useMutation({
     mutationFn: TodoService.completeTodo,
     onMutate: async (task) => {
+      await queryClient.cancelQueries({ queryKey: ['todoList'] })
+
       const tasks = queryClient.getQueryData<Task[]>(['todoList'])
 
       if (tasks) {
@@ -27,49 +31,17 @@ export function useCompleteTodo() {
             return item
           })
         )
-
         return { previousTask, task, tasks }
       }
-
-
     },
-    /* Analisar melhor como implementar essa parte de onError... em caso de erros durante um post, por exemplo.
-      Durante um post pode ser que haja um erro, mas task já foi marcada como concluída, então é necessário desmarcá-la.
-    */
-    // onError: (_err, task, context) => { 
-    //   if (!context) return
-    //   // queryClient.setQueryData(['todoList', task.id], context?.previousTask)
-
-    //   queryClient.setQueryData(['todoList'],
-    //   context.tasks.map((item) => {
-    //     if (item.id === context.task.id) {
-    //       return {
-    //         id: context.previousTask.id,
-    //         isCompleted: context.previousTask.isCompleted,
-    //         description: context.previousTask.description
-    //       }
-    //     }
-    //     return item
-    //   })
-    // )
-    // },
-    onSettled: (_newTodo, error, _variables, context) => {
-      if (error) return
-
+    /* É importante definir o onError, pois em caso de erros durante um post, put, por exemplo, a task já foi marcada     como concluída, então é necessário desmarcá-la. */
+    onError: (_err, task, context) => {
       if (!context) return
+      queryClient.setQueryData(['todoList', task.id], context?.previousTask)
+    },
 
-      queryClient.setQueryData(['todoList'],
-        context.tasks.map((item) => {
-          if (item.id === context.task.id) {
-            return {
-              id: context.task.id,
-              isCompleted: context.task.isCompleted,
-              description: context.previousTask.description
-            }
-          }
-          return item
-        })
-      )
+    onSettled: (_newTodo, _error, _variables, _context) => {
+      queryClient.invalidateQueries({ queryKey: ['todoList'] })
     },
   })
 
