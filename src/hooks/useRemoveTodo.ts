@@ -10,22 +10,23 @@ export function useRemoveTodo() {
     {
       mutationFn: TodoService.removeTodo,
       onMutate: async ({ id }) => {
-        const tasks = queryClient.getQueryData<Task[]>(['todoList'])
-        return { tasks, id }
+        await queryClient.cancelQueries({ queryKey: ['todoList'] })
+
+        const previousTasks = queryClient.getQueryData<Task[]>(['todoList'])
+
+        queryClient.setQueryData(['todoList'],
+        previousTasks?.filter((item) => item.id !== id)
+      )
+
+        return { previousTasks }
       },
 
       onError: (_err, _newTodo, context) => {
-        queryClient.setQueryData(['todoList'], context?.tasks)
+        queryClient.setQueryData(['todoList'], context?.previousTasks)
       },
 
-      onSettled: (_newTodo, error, _variables, context) => {
-        if (error) return
-
-        if (!context) return
-
-        queryClient.setQueryData(['todoList'],
-          context?.tasks?.filter((item) => item.id !== context.id)
-        )
+      onSettled: (_newTodo, _error, _variables, _context) => {
+        queryClient.invalidateQueries({ queryKey: ['todoList'] })
       },
     }
   )
