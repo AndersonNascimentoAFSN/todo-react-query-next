@@ -2,6 +2,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { TodoService } from "../services/http/todo";
 import { Task } from "@/types/task";
 
+// Optimistic Updates (https://tanstack.com/query/v4/docs/react/guides/optimistic-updates)
+// A atualização ocorre antes da requisição, ou seja, o estado do cache é atualizado antes da requisição. Caso a requisição falhe, o estado do cache é atualizado para o estado anterior. Caso a requisição seja bem sucedida, o estado do cache é atualizado para o estado atualizado.
 
 export function useRemoveTodo() {
   const queryClient = useQueryClient()
