@@ -17,7 +17,7 @@ export function useCreateTodo() {
 
       const previousTodos = queryClient.getQueryData<Task[]>(['todoList'])
 
-      queryClient.setQueryData<Task[]>(['todoList'], (tasks) => {
+      queryClient.setQueryData<Omit<Task, 'id'>[]>(['todoList'], (tasks) => {
         if (tasks) {
           return [...tasks, newTask]
         } else {
