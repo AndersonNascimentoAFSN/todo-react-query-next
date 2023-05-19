@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { v4 as uuidv4 } from 'uuid';
 
 import { Task } from "@/types/task";
 
@@ -14,14 +15,15 @@ export function useCreateTodo() {
     mutationFn: TodoService.createTodo,
     onMutate: async (newTask) => {
       await queryClient.cancelQueries({ queryKey: ['todoList'] })
+      const idTemp =  uuidv4().split('').splice(0, 2)
 
       const previousTodos = queryClient.getQueryData<Task[]>(['todoList'])
 
       queryClient.setQueryData<Omit<Task, 'id'>[]>(['todoList'], (tasks) => {
         if (tasks) {
-          return [...tasks, newTask]
+          return [...tasks, { ...newTask, id: idTemp }]
         } else {
-          return [newTask]
+          return [{ ...newTask, id: idTemp }]
         }
       })
 
