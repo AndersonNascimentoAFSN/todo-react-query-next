@@ -3,14 +3,14 @@ import { Task } from "../types"
 import { todoData } from "../data/todo-data"
 
 export const todoHandlers = [
-  rest.get('*/todo', (_req, res, ctx) => {
+  rest.get('*/todos', (_req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json<Task[]>(todoData)
     )
   }),
 
-  rest.post('*/todo', async (req, res, ctx) => {
+  rest.post('*/todos', async (req, res, ctx) => {
     const { description, isCompleted } = await req.json()
     
     const id = Number(todoData[todoData.length - 1].id) + 1
@@ -29,7 +29,7 @@ export const todoHandlers = [
     )
   }),
 
-  rest.delete('*/todo/:id', async (req, res, ctx) => {
+  rest.delete('*/todos/:id', async (req, res, ctx) => {
     const { id } = req.params;
 
     if (id) {
@@ -45,7 +45,7 @@ export const todoHandlers = [
     return res(ctx.json({}), ctx.status(404))
   }),
 
-  rest.patch('*/todo/:id', async (req, res, ctx) => {
+  rest.patch('*/todos/:id', async (req, res, ctx) => {
     const { id } = req.params;
 
     const { isCompleted } = await req.json<{ isCompleted: boolean }>()

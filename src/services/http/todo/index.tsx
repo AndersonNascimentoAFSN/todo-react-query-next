@@ -3,11 +3,17 @@ import { api } from "@/services/api"
 
 import { CompletedTodoProps, CreateTodoProps, GetTodoByIdProps, RemoveTodoProps } from "./types"
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+
+if (!API_URL) {
+  throw new Error('NEXT_PUBLIC_API_URL not found')
+}
+
 class Todo {
   async createTodo({
     description, isCompleted
   }: CreateTodoProps) {
-    const todoCreated = await api<Task>('http://localhost:3333/todo', {
+    const todoCreated = await api<Task>(`${API_URL}/todo`, {
       method: "POST",
       body: JSON.stringify({ description, isCompleted }),
       headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -17,7 +23,7 @@ class Todo {
   }
 
   async getTodoList() {
-    const todos = await api<Task[]>('http://localhost:3333/todo')
+    const todos = await api<Task[]>(`${API_URL}/todo`)
 
     return todos
   }
@@ -25,7 +31,7 @@ class Todo {
   async getTodoById({
     id,
   }: GetTodoByIdProps) {
-    const todos = await api<Task[]>(`http://localhost:3333/todo/${id}`)
+    const todos = await api<Task[]>(`${API_URL}/todo/${id}`)
 
     return todos
   }
@@ -33,7 +39,7 @@ class Todo {
   async removeTodo({
     id
   }: RemoveTodoProps) {
-    await api<Task>(`http://localhost:3333/todo/${id}`, {
+    await api<Task>(`${API_URL}/todo/${id}`, {
       method: "DELETE",
       headers: { "Content-type": "application/json; charset=UTF-8" },
     })
@@ -43,7 +49,7 @@ class Todo {
     id,
     isCompleted
   }: CompletedTodoProps) {
-    await api<Task>(`http://localhost:3333/todo/${id}`, {
+    await api<Task>(`${API_URL}/todo/${id}`, {
       method: "PATCH",
       body: JSON.stringify({ isCompleted }),
       headers: { "Content-type": "application/json; charset=UTF-8" },
