@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import { Header } from '../components/Header'
 import { WrapperTodoForm } from '../components/WrapperTodoForm'
-import HydratedTodos from '../hydratedTodos'
+// import HydratedTodos from '../hydratedTodos'
 import { TodoList } from '../components/TodoList'
 import Link from 'next/link'
 
@@ -14,12 +14,14 @@ export default function Todos() {
         <WrapperTodoForm />
 
         <Suspense fallback={<div>Loading...</div>}>
-          {/* @ts-expect-error Server Component */}
-          <HydratedTodos>
+
+          {/* <HydratedTodos> */}
             <TodoList />
-          </HydratedTodos>
+          {/* </HydratedTodos> */}
         </Suspense>
       </main>
     </>
   )
 }
+
+          // {/* @ts-expect-error Server Component */}

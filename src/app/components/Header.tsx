@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import { TaskCompleted } from "./TaskCompleted";
-import HydratedTodos from "../hydratedTodos";
+// import { TaskCompleted } from "./TaskCompleted";
+// import HydratedTodos from "../hydratedTodos";
 
 export function Header() {
   return (
@@ -9,11 +9,13 @@ export function Header() {
       <h3 className="m-auto text-white text-xl">Organize suas tarefas de forma simples e prática</h3>
 
       <Suspense fallback={<div>Loading...</div>}>
-        {/* @ts-expect-error Server Component */}
-        <HydratedTodos>
+  
+        {/* <HydratedTodos>
           <TaskCompleted />
-        </HydratedTodos>
+        </HydratedTodos> */}
       </Suspense>
     </header>
   )
 }
+
+      // {/* @ts-expect-error Server Component */}
